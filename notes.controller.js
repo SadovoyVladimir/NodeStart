@@ -40,7 +40,7 @@ async function printNotes() {
 async function removeNote(id) {
   const notes = await getNotes()
   newNotes = notes.filter(note => note.id !== id.toString())
-  await fs.writeFile(notesPath, JSON.stringify(newNotes ?? []))
+  await fs.writeFile(notesPath, JSON.stringify(newNotes))
   if (JSON.stringify(notes) !== JSON.stringify(newNotes)) {
     console.log(chalc.bgYellow('Note was deleted!'))
   }
@@ -54,7 +54,7 @@ async function editNote(id, title) {
     }
     return note
   })
-  await fs.writeFile(notesPath, JSON.stringify(newNotes ?? []))
+  await fs.writeFile(notesPath, JSON.stringify(newNotes))
 }
 
 module.exports = {

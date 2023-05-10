@@ -11,17 +11,18 @@ document.addEventListener('click', async (event) => {
     let newTitle = prompt('Enter new title', title)
     if (newTitle) {
       await edit(id, newTitle)
+      event.target.closest('li').children[0].textContent = newTitle
     }
   }
 
 })
 
 async function remove(id) {
-  await fetch(`/${id}`, {method: 'DELETE'})
+  await fetch(`/${id}`, { method: 'DELETE' })
 }
 
 async function getTitle(id) {
-  const response = await fetch(`/${id}`, {method: 'GET'})
+  const response = await fetch(`/${id}`, { method: 'GET' })
   const title = await response.json()
   return title
 }
@@ -30,6 +31,6 @@ async function edit(id, title) {
   await fetch(`/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({title})
+    body: JSON.stringify({ title })
   })
 }
